@@ -18,7 +18,20 @@ Bundler.require(*Rails.groups)
 
 module TodoApi
   class Application < Rails::Application
+
+    # autoloads lib folder during production
+    config.eager_load_paths << Rails.root.join('lib')
+
+    # autoloads lib folder during development
     config.autoload_paths << Rails.root.join('lib')
+
+    # cors configuration
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: %i[get post options]
+      end
+    end
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
