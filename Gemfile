@@ -43,6 +43,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
+end
+
 # gem 'devise_token_auth'
 gem 'jwt', '~> 2.1.0'
 gem 'rack-cors', require: 'rack/cors'

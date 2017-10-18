@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     if @user.save
       response = { message: 'User created successfully' }
       render json: response, status: :created
+    elsif User.find_by(username: params[:username])
+      render json: { message: 'Username already registered' }, status: :conflict
     else
       render json: @user.errors, status: :bad
     end
@@ -27,6 +29,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password)
+    params.permit(:username, :password, :password_confirmation)
   end
 end
