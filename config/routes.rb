@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :deadlines
   resources :tasks
   resources :projects
   post 'auth/register', to: 'users#register'
