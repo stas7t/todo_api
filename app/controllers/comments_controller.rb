@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_comment, only: %i[show update destroy]
+  before_action :set_task, only: %i[create]
 
   # GET /comments
   # GET /comments.json
@@ -15,10 +16,11 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @task.comments.new(comment_params)
 
     if @comment.save
-      render :show, status: :created, location: @comment
+      # render :show, status: :created, location: @comment
+      redirect_to root_path
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -28,7 +30,8 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1.json
   def update
     if @comment.update(comment_params)
-      render :show, status: :ok, location: @comment
+      # render :show, status: :ok, location: @comment
+      redirect_to root_path
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -41,13 +44,17 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:text, :file)
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def set_task
+    @task = Task.find(params[:task_id])
+  end
+
+  def comment_params
+    # params.require(:comment).permit(:text, :file)
+    params.permit(:text, :file, :task_id)
+  end
 end

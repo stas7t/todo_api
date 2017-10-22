@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
+
   before_action :set_project, only: %i[show update destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = current_user.projects
   end
 
   # GET /projects/1
@@ -14,7 +15,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
 
     if @project.save
       render :show, status: :created, location: @project
@@ -46,6 +47,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name)
+    # params.require(:project).permit(:name)
+    params.permit(:name, :user_id)
   end
 end

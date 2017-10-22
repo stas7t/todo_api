@@ -1,5 +1,6 @@
 class DeadlinesController < ApplicationController
-  before_action :set_deadline, only: [:show, :update, :destroy]
+  before_action :set_deadline, only: %i[show update destroy]
+  before_action :set_task, only: %i[create]
 
   # GET /deadlines
   # GET /deadlines.json
@@ -9,8 +10,7 @@ class DeadlinesController < ApplicationController
 
   # GET /deadlines/1
   # GET /deadlines/1.json
-  def show
-  end
+  def show; end
 
   # POST /deadlines
   # POST /deadlines.json
@@ -18,7 +18,8 @@ class DeadlinesController < ApplicationController
     @deadline = Deadline.new(deadline_params)
 
     if @deadline.save
-      render :show, status: :created, location: @deadline
+      # render :show, status: :created, location: @deadline
+      redirect_to root_path
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
@@ -28,7 +29,8 @@ class DeadlinesController < ApplicationController
   # PATCH/PUT /deadlines/1.json
   def update
     if @deadline.update(deadline_params)
-      render :show, status: :ok, location: @deadline
+      # render :show, status: :ok, location: @deadline
+      redirect_to root_path
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
@@ -41,13 +43,17 @@ class DeadlinesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_deadline
-      @deadline = Deadline.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def deadline_params
-      params.require(:deadline).permit(:date, :time)
-    end
+  def set_deadline
+    @deadline = Deadline.find(params[:id])
+  end
+
+  def set_task
+    @task = Task.find(params[:task_id])
+  end
+
+  def deadline_params
+    # params.require(:deadline).permit(:date, :time)
+    params.permit(:date, :time, :task_id)
+  end
 end
