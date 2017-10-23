@@ -1,11 +1,12 @@
-class TasksController < ApplicationController
+class Api::V1::TasksController < ApplicationController
+
   before_action :set_task, only: %i[show update destroy]
-  before_action :set_project, only: %i[create]
+  before_action :set_project, only: %i[index create]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = @project.tasks
   end
 
   # GET /tasks/1
@@ -15,10 +16,10 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = @project.tasks.build(task_params)
 
     if @task.save
-      render :show, status: :created, location: @task
+      redirect_to api_v1_root_path
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     if @task.update(task_params)
-      render :show, status: :ok, location: @task
+      redirect_to api_v1_root_path
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -51,7 +52,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    # params.require(:task).permit(:name, :completed)
     params.permit(:name, :completed, :project_id)
   end
 end

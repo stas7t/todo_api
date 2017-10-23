@@ -1,2 +1,2 @@
 json.extract! deadline, :id, :date, :time, :created_at, :updated_at, :task_id
-json.url deadline_url(deadline, format: :json)
+json.url api_v1_deadline_url(deadline, format: :json)

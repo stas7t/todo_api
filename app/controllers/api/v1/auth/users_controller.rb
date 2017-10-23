@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::Auth::UsersController < ApplicationController
   skip_before_action :authenticate_request, only: %i[login register]
 
   # POST /register

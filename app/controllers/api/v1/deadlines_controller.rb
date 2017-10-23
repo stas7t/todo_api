@@ -1,11 +1,12 @@
-class DeadlinesController < ApplicationController
+class Api::V1::DeadlinesController < ApplicationController
+
   before_action :set_deadline, only: %i[show update destroy]
   before_action :set_task, only: %i[create]
 
   # GET /deadlines
   # GET /deadlines.json
   def index
-    @deadlines = Deadline.all
+    @deadlines = @task.deadlines
   end
 
   # GET /deadlines/1
@@ -15,11 +16,10 @@ class DeadlinesController < ApplicationController
   # POST /deadlines
   # POST /deadlines.json
   def create
-    @deadline = Deadline.new(deadline_params)
+    @deadline = Deadline.build(deadline_params)
 
     if @deadline.save
-      # render :show, status: :created, location: @deadline
-      redirect_to root_path
+      redirect_to api_v1_root_path
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
@@ -29,8 +29,7 @@ class DeadlinesController < ApplicationController
   # PATCH/PUT /deadlines/1.json
   def update
     if @deadline.update(deadline_params)
-      # render :show, status: :ok, location: @deadline
-      redirect_to root_path
+      redirect_to api_v1_root_path
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
@@ -53,7 +52,6 @@ class DeadlinesController < ApplicationController
   end
 
   def deadline_params
-    # params.require(:deadline).permit(:date, :time)
     params.permit(:date, :time, :task_id)
   end
 end
