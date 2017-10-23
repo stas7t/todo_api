@@ -1,1 +1,1 @@
-json.partial! "deadlines/deadline", deadline: @deadline
+json.partial! 'api/v1/deadlines/deadline', deadline: @deadline

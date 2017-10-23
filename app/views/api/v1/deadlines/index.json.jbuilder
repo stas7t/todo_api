@@ -1,1 +1,1 @@
-json.array! @deadlines, partial: 'deadlines/deadline', as: :deadline
+json.array! @deadlines, partial: 'api/v1/deadlines/deadline', as: :deadline

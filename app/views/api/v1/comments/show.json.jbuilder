@@ -1,1 +1,1 @@
-json.partial! "comments/comment", comment: @comment
+json.partial! 'api/v1/comments/comment', comment: @comment

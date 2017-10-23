@@ -1,12 +1,12 @@
 class Api::V1::DeadlinesController < ApplicationController
 
   before_action :set_deadline, only: %i[show update destroy]
-  before_action :set_task, only: %i[create]
+  before_action :set_task, only: %i[index create]
 
   # GET /deadlines
   # GET /deadlines.json
   def index
-    @deadlines = @task.deadlines
+    @deadlines = @task.deadline
   end
 
   # GET /deadlines/1
@@ -16,7 +16,7 @@ class Api::V1::DeadlinesController < ApplicationController
   # POST /deadlines
   # POST /deadlines.json
   def create
-    @deadline = Deadline.build(deadline_params)
+    @deadline = Deadline.new(deadline_params)
 
     if @deadline.save
       redirect_to api_v1_root_path

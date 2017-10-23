@@ -1,7 +1,7 @@
 class Api::V1::CommentsController < ApplicationController
 
   before_action :set_comment, only: %i[show update destroy]
-  before_action :set_task, only: %i[create]
+  before_action :set_task, only: %i[index create]
 
   # GET /comments
   # GET /comments.json
@@ -29,7 +29,7 @@ class Api::V1::CommentsController < ApplicationController
   # PATCH/PUT /comments/1.json
   def update
     if @comment.update(comment_params)
-      redirect_to api_v1_root_path
+      render :show, status: :ok
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -52,6 +52,6 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def comment_params
-    params.permit(:text, :file, :task_id)
+    params.permit(:text, :file, :file_cache, :remote_file_url, :task_id)
   end
 end

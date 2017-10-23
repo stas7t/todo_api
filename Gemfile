@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
@@ -19,13 +21,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS),
-# making cross-origin AJAX possible
-# gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
@@ -47,6 +42,10 @@ group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end
+
+gem 'carrierwave', '~> 1.0'
+gem 'file_validators'
+gem 'fog-aws'
 
 # gem 'devise_token_auth'
 gem 'jwt', '~> 2.1.0'
