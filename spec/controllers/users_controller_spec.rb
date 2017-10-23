@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe Api::V1::Auth::UsersController, type: :controller do
   describe 'POST #register' do
     it 'registers new user' do
       user_attrs = FactoryGirl.attributes_for(:user)

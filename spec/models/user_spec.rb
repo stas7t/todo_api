@@ -19,4 +19,6 @@ RSpec.describe User, type: :model do
       expect(subject).not_to allow_value("password#{char}").for(:password)
     end
   end
+
+  it { expect(subject).to have_many(:projects) }
 end

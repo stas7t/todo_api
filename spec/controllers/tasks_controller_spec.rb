@@ -23,7 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe TasksController, type: :controller do
+RSpec.describe Api::V1::TasksController, type: :controller do
+
+  let(:user) { FactoryGirl.create(:user) }
+  let(:project) { FactoryGirl.create(:project, user_id: user.id) }
 
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
