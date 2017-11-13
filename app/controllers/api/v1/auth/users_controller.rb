@@ -4,8 +4,12 @@ class Api::V1::Auth::UsersController < ApplicationController
   # POST /register
   def register
     @user = User.create(user_params)
+
     if @user.save
-      response = { message: 'User created successfully' }
+      command = AuthenticateUser.call(@user.username, @user.password)
+
+      response = { auth_token: command.result,
+                   message: 'User created successfully' }
       render json: response, status: :created
     elsif User.find_by(username: params[:username])
       render json: { message: 'Username already registered' }, status: :conflict
