@@ -18,9 +18,7 @@ class Api::V1::ProjectsController < ApplicationController
     @project = current_user.projects.build(project_params)
 
     if @project.save
-      # redirect_to api_v1_root_path
-      # render :index
-      redirect_to action: 'index', status: 200
+      render json: @project, status: :created
     else
       render json: @project.errors, status: :unprocessable_entity
     end
