@@ -19,7 +19,8 @@ class Api::V1::ProjectsController < ApplicationController
 
     if @project.save
       # redirect_to api_v1_root_path
-      render :index
+      # render :index
+      redirect_to action: 'index', status: 200
     else
       render json: @project.errors, status: :unprocessable_entity
     end
