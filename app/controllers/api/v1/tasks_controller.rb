@@ -19,7 +19,7 @@ class Api::V1::TasksController < ApplicationController
     @task = @project.tasks.build(task_params)
 
     if @task.save
-      redirect_to api_v1_root_path
+      render json: @task, status: :created
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     if @task.update(task_params)
-      redirect_to api_v1_root_path
+      render json: @task, status: :accepted
     else
       render json: @task.errors, status: :unprocessable_entity
     end
