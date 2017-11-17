@@ -29,7 +29,7 @@ class Api::V1::CommentsController < ApplicationController
   # PATCH/PUT /comments/1.json
   def update
     if @comment.update(comment_params)
-      render json: @task, status: :accepted
+      render json: @task, status: :ok
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

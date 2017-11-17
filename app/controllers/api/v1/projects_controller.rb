@@ -28,7 +28,7 @@ class Api::V1::ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     if @project.update(project_params)
-      render json: @project, status: :accepted
+      render json: @project, status: :ok
     else
       render json: @project.errors, status: :unprocessable_entity
     end

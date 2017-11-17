@@ -29,7 +29,7 @@ class Api::V1::TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     if @task.update(task_params)
-      render json: @task, status: :accepted
+      render json: @task, status: :ok
     else
       render json: @task.errors, status: :unprocessable_entity
     end

@@ -29,7 +29,7 @@ class Api::V1::DeadlinesController < ApplicationController
   # PATCH/PUT /deadlines/1.json
   def update
     if @deadline.update(deadline_params)
-      render json: @deadline, status: :accepted
+      render json: @deadline, status: :ok
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
