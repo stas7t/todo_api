@@ -15,24 +15,18 @@ gem 'rails', '~> 5.1.4'
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 group :production do
   gem 'pg', '~> 0.21'
   gem 'rails_12factor'
-  # gem 'railties'
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger
-  # console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_girl_rails', '~> 4.8'
   gem 'rspec-rails', '~> 3.6'
-  # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
 end
 
@@ -53,7 +47,6 @@ gem 'carrierwave', '~> 1.0'
 gem 'file_validators'
 gem 'fog-aws'
 
-# gem 'devise_token_auth'
 gem 'jwt', '~> 2.1.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'simple_command', '~> 0.0.9'
