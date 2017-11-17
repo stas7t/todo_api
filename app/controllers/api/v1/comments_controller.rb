@@ -19,7 +19,7 @@ class Api::V1::CommentsController < ApplicationController
     @comment = @task.comments.build(comment_params)
 
     if @comment.save
-      redirect_to api_v1_root_path
+      render json: @comment, status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::CommentsController < ApplicationController
   # PATCH/PUT /comments/1.json
   def update
     if @comment.update(comment_params)
-      render :show, status: :ok
+      render json: @task, status: :ok
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
