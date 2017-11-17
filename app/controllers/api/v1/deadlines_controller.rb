@@ -19,7 +19,7 @@ class Api::V1::DeadlinesController < ApplicationController
     @deadline = Deadline.new(deadline_params)
 
     if @deadline.save
-      redirect_to api_v1_root_path
+      render json: @deadline, status: :created
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::DeadlinesController < ApplicationController
   # PATCH/PUT /deadlines/1.json
   def update
     if @deadline.update(deadline_params)
-      redirect_to api_v1_root_path
+      render json: @deadline, status: :accepted
     else
       render json: @deadline.errors, status: :unprocessable_entity
     end
