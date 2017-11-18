@@ -44,6 +44,7 @@ group :test do
 end
 
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-base64', '~> 2.6'
 gem 'file_validators'
 gem 'fog-aws'
 
