@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "username#{n}" }
-    sequence(:password) { |n| "password#{n}" }
-    sequence(:password_confirmation) { |n| "password#{n}" }
+    password 'password1'
+    password_confirmation 'password1'
 
     trait :no_existing_user do
       username 'username1X'
