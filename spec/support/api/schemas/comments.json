@@ -1,0 +1,16 @@
+{
+  "type": "array",
+  "items": {
+    "id": { "type": "number" },
+    "text": { "type": "string" },
+    "file": { 
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" }
+      }
+    },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" },
+    "task_id": { "type": "number" }
+  }
+}

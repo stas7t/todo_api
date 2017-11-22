@@ -19,6 +19,8 @@ class Api::V1::ProjectsController < ApplicationController
 
     if @project.save
       render json: @project, status: :created
+    elsif Project.find_by(name: params[:name])
+      render json: { message: 'The project with such name does already exist.' }, status: :conflict
     else
       render json: @project.errors, status: :unprocessable_entity
     end

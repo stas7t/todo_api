@@ -9,10 +9,10 @@ class Api::V1::Auth::UsersController < ApplicationController
       command = AuthenticateUser.call(@user.username, @user.password)
 
       response = { auth_token: command.result,
-                   message: 'User created successfully' }
+                   message: 'You are successfully registered!' }
       render json: response, status: :created
     elsif User.find_by(username: params[:username])
-      render json: { message: 'Username already registered' }, status: :conflict
+      render json: { message: 'This login already registered. Please, log in.' }, status: :conflict
     else
       render json: @user.errors, status: :bad
     end
@@ -24,7 +24,7 @@ class Api::V1::Auth::UsersController < ApplicationController
 
     if command.success?
       render json: { auth_token: command.result,
-                     message: 'Login successful' }
+                     message: 'You are successfully logged in!' }
     else
       render json: { error: command.errors }, status: :unauthorized
     end

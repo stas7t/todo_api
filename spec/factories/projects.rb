@@ -1,5 +1,10 @@
 FactoryGirl.define do
   factory :project do
-    name 'MyProject'
+    sequence(:name) { |n| "Project #{n}" }
+    user
+
+    trait :edited do
+      name 'edited name'
+    end
   end
 end
