@@ -8,18 +8,11 @@ class Api::V1::TasksController < ApplicationController
     formats ['json']
   end
 
-  def_param_group :task do
-    param :task, Hash do
-      param :id, Integer, "ID of the task", required: true
-      param :name, String, "Name of the task", required: true
-      param :project_id, Integer, "ID of the task`s project", required: true
-    end
-  end
-
   # GET /tasks
   # GET /tasks.json
   api :GET, "/projects/:project_id/tasks", "Get list of tasks"
-  param :project_id, Integer, "ID of the task`s project", required: true
+  param :project_id, String, "ID of the task`s project", required: true
+
   def index
     @tasks = @project.tasks
   end
@@ -27,13 +20,16 @@ class Api::V1::TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   api :GET, "/tasks/:id", "Show specific task"
-  param :id, Integer, "ID of the task", required: true
+  param :id, String, "ID of the task", required: true
+
   def show; end
 
   # POST /tasks
   # POST /tasks.json
   api :POST, "/projects/:project_id/tasks", "Create a task"
-  param_group :task
+  param :project_id, String, "ID of the task`s project", required: true
+  param :name, String, "Name of the task", required: true
+
   def create
     @task = @project.tasks.build(task_params)
 
@@ -47,7 +43,9 @@ class Api::V1::TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   api :PUT, "/tasks/:id", "Update a task"
-  param_group :task
+  param :id, String, "ID of the task", required: true
+  param :name, String, "Name of the task", required: true
+
   def update
     if @task.update(task_params)
       render json: @task, status: :ok
@@ -59,7 +57,8 @@ class Api::V1::TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   api :DELETE, "/tasks/:id", "Delete a task"
-  param :id, Integer, "ID of the task", required: true
+  param :id, String, "ID of the task", required: true
+
   def destroy
     @task.destroy
   end

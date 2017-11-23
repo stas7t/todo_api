@@ -4,15 +4,12 @@ class Api::V1::Auth::UsersController < ApplicationController
   resource_description do
     short 'App users'
     formats ['json']
-    param :id, Fixnum, desc: 'User ID', required: false
-    param :user, Hash, desc: 'Param description for all methods' do
-      param :username, String, desc: 'Username for login', required: true
-      param :password, String, desc: 'Password for login', required: true
-    end
   end
 
   # POST /register
   api :POST, '/register', 'Register user in the app'
+  param :username, String, desc: 'Username for login', required: true
+  param :password, String, desc: 'Password for login', required: true
   param :password_confirmation, String, desc: 'Password confirmation', required: true
   def register
     @user = User.create(user_params)
@@ -32,6 +29,8 @@ class Api::V1::Auth::UsersController < ApplicationController
 
   # POST /login
   api :POST, '/login', 'Log in user in the app'
+  param :username, String, desc: 'Username for login', required: true
+  param :password, String, desc: 'Password for login', required: true
   error code: 401, desc: 'Unauthorized'
   def login
     command = AuthenticateUser.call(params[:username], params[:password])
