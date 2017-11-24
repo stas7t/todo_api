@@ -49,10 +49,10 @@ class Api::V1::TasksController < ApplicationController
 
   def update
     command = UpdateTask.call(@task, task_params)
-    project = Project.find(@task.project_id)
+    # project = Project.find(@task.project_id)
 
     if command.result
-      render json: project.tasks, status: :ok
+      render json: @task, status: :ok
     else
       render json: @task.errors, status: :unprocessable_entity
     end
