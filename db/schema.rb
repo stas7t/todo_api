@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019225232) do
+ActiveRecord::Schema.define(version: 20171123224428) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20171019225232) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "project_id"
+    t.integer "position"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 

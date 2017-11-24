@@ -45,10 +45,14 @@ class Api::V1::TasksController < ApplicationController
   api :PUT, "/tasks/:id", "Update a task"
   param :id, String, "ID of the task", required: true
   param :name, String, "Name of the task", required: true
+  param :move, String, "Direction of the task move", required: false
 
   def update
-    if @task.update(task_params)
-      render json: @task, status: :ok
+    command = UpdateTask.call(@task, task_params)
+    project = Project.find(@task.project_id)
+
+    if command.result
+      render json: project.tasks, status: :ok
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -74,6 +78,6 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def task_params
-    params.permit(:name, :completed, :project_id)
+    params.permit(:name, :completed, :project_id, :move)
   end
 end

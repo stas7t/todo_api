@@ -44,6 +44,7 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end
 
+gem 'acts_as_list', '~> 0.9.10'
 gem 'apipie-rails', '~> 0.5.5'
 
 gem 'carrierwave', '~> 1.0'

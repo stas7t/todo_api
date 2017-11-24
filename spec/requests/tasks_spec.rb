@@ -33,7 +33,7 @@ RSpec.describe "Tasks", type: :request do
       edited_task = FactoryGirl.attributes_for(:task, :edited)
       put "/api/v1/tasks/#{task.id}", headers: headers, params: edited_task
       expect(response).to have_http_status(200)
-      expect(response).to match_response_schema('task')
+      expect(response).to match_response_schema('tasks')
       expect(response.body).to include('edited name')
     end
   end
