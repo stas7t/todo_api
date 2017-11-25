@@ -40,13 +40,13 @@ RSpec.describe "Users", type: :request do
       it "do not registers user with lower than min username" do
         invalid_user = FactoryGirl.attributes_for(:user, :lower_than_min_username)
         post api_v1_auth_register_path, params: invalid_user 
-        expect(response.body).to include('username', "minimum is 3 characters")
+        expect(response.body).to include("Username is too short. Minimum 3 characters.")
       end
       
       it "do not registers user with greater than max username" do
         invalid_user = FactoryGirl.attributes_for(:user, :greater_than_max_username)
         post api_v1_auth_register_path, params: invalid_user 
-        expect(response.body).to include('username', "maximum is 50 characters")
+        expect(response.body).to include("Username is too long. Maximum 50 characters.")
       end
       
       it "do not registers user with lower than min password" do
