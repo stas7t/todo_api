@@ -6,8 +6,5 @@ RSpec.describe Deadline, type: :model do
   let(:task) { FactoryGirl.create(:task, user_id: user.id, project_id: project.id) }
   let(:deadline) { FactoryGirl.create(:deadline, task_id: task.id) }
 
-  # it { expect(subject).to validate_presence_of :text }
-  it { expect(subject).to validate_uniqueness_of :task_id }
-
   it { expect(subject).to belong_to(:task) }
 end
