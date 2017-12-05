@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20171123224428) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text "text"
     t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "task_id"
+    t.bigint "task_id"
     t.index ["task_id"], name: "index_comments_on_task_id"
   end
 
@@ -26,7 +29,7 @@ ActiveRecord::Schema.define(version: 20171123224428) do
     t.time "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "task_id"
+    t.bigint "task_id"
     t.index ["task_id"], name: "index_deadlines_on_task_id"
   end
 
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20171123224428) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171123224428) do
     t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "project_id"
+    t.bigint "project_id"
     t.integer "position"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
@@ -55,4 +58,8 @@ ActiveRecord::Schema.define(version: 20171123224428) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "tasks"
+  add_foreign_key "deadlines", "tasks"
+  add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "projects"
 end

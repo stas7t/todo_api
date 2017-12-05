@@ -11,6 +11,8 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.21'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -19,7 +21,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 group :production do
-  gem 'pg', '~> 0.21'
   gem 'rails_12factor'
 end
 
@@ -27,7 +28,6 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_girl_rails', '~> 4.8'
   gem 'rspec-rails', '~> 3.6'
-  gem 'sqlite3'
 end
 
 group :development do
