@@ -1,7 +1,7 @@
 class Api::V1::CommentsController < ApplicationController
-
-  before_action :set_comment, only: %i[show update destroy]
-  before_action :set_task, only: %i[index create]
+  load_and_authorize_resource :project, through: :current_user
+  load_and_authorize_resource :task, through: :project
+  load_and_authorize_resource through: :task, shallow: true
 
   resource_description do
     short 'Comments'
@@ -20,7 +20,7 @@ class Api::V1::CommentsController < ApplicationController
   param :task_id, String, "ID of the comment`s task", required: true
 
   def index
-    @comments = @task.comments
+    render json: @comments
   end
 
   # GET /comments/1
@@ -28,7 +28,9 @@ class Api::V1::CommentsController < ApplicationController
   api :GET, "/comments/:id", "Show specific comment"
   param :id, String, "ID of the comment", required: true
 
-  def show; end
+  def show
+    render json: @comment
+  end
 
   # POST /comments
   # POST /comments.json
@@ -71,14 +73,6 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   private
-
-  def set_comment
-    @comment = Comment.find(params[:id])
-  end
-
-  def set_task
-    @task = Task.find(params[:task_id])
-  end
 
   def comment_params
     params.permit(:text, :file, :file_cache, :remote_file_url, :task_id)

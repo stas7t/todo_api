@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Comments", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:token) { AuthenticateUser.call(user.username, user.password).result }
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, user_id: user.id) }
   let(:task) { FactoryGirl.create(:task, project_id: project.id) }
   let(:comments) { FactoryGirl.create_list(:comment, 3, task_id: task.id) }
   let(:comment) { FactoryGirl.create(:comment, task_id: task.id) }

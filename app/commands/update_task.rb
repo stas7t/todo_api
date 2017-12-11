@@ -8,7 +8,7 @@ class UpdateTask
 
   def call
     change_position(@params[:move]) if @params[:move]
-    @task.update( { name: @params[:name], completed: @params[:completed] } )
+    @task.update( { name: @params[:name], completed: @params[:completed], deadline: @params[:deadline] } )
   end
 
   private

@@ -1,7 +1,6 @@
 class Api::V1::ProjectsController < ApplicationController
+  load_and_authorize_resource through: :current_user
 
-  before_action :set_project, only: %i[show update destroy]
-  
   resource_description do
     short 'Projects'
     formats ['json']
@@ -12,7 +11,7 @@ class Api::V1::ProjectsController < ApplicationController
   api :GET, "/projects", "Get list of projects"
 
   def index
-    @projects = current_user.projects
+    render json: @projects
   end
 
   # GET /projects/1
@@ -20,7 +19,9 @@ class Api::V1::ProjectsController < ApplicationController
   api :GET, "/projects/:id", "Show specific project"
   param :id, String, "ID of the project", required: true
 
-  def show; end
+  def show
+    render json: @project
+  end
 
   # POST /projects
   # POST /projects.json
@@ -65,10 +66,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   private
-
-  def set_project
-    @project = Project.find(params[:id])
-  end
 
   def project_params
     params.permit(:name, :user_id)

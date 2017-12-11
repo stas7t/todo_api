@@ -19,9 +19,7 @@ FactoryGirl.define do
     end
 
     trait :with_deadline do
-      after(:create) do |instance|
-        create :deadline, task: instance
-      end
+      name '2017-12-11T12:30:00Z'
     end
   end
 end

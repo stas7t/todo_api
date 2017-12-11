@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Tasks", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:token) { AuthenticateUser.call(user.username, user.password).result }
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, user_id: user.id) }
   let(:tasks) { FactoryGirl.create_list(:task, 3, project_id: project.id) }
   let(:task) { FactoryGirl.create(:task, project_id: project.id) }
   let(:task_params) { FactoryGirl.attributes_for(:task) }

@@ -4,7 +4,7 @@ RSpec.describe "Projects", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:token) { AuthenticateUser.call(user.username, user.password).result }
   let(:projects) { FactoryGirl.create_list(:project, 3, user_id: user.id) }
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, user_id: user.id) }
   let(:project_params) { FactoryGirl.attributes_for(:project) }
 
   let(:headers) { {authorization: token, accept: 'application/json'} }

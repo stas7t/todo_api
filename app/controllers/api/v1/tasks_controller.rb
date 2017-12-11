@@ -1,7 +1,6 @@
 class Api::V1::TasksController < ApplicationController
-
-  before_action :set_task, only: %i[show update destroy]
-  before_action :set_project, only: %i[index create]
+  load_and_authorize_resource :project, through: :current_user
+  load_and_authorize_resource through: :project, shallow: true
 
   resource_description do
     short 'Tasks'
@@ -14,7 +13,7 @@ class Api::V1::TasksController < ApplicationController
   param :project_id, String, "ID of the task`s project", required: true
 
   def index
-    @tasks = @project.tasks
+    render json: @tasks
   end
 
   # GET /tasks/1
@@ -22,7 +21,9 @@ class Api::V1::TasksController < ApplicationController
   api :GET, "/tasks/:id", "Show specific task"
   param :id, String, "ID of the task", required: true
 
-  def show; end
+  def show
+    render json: @task
+  end
 
   # POST /tasks
   # POST /tasks.json
@@ -49,7 +50,6 @@ class Api::V1::TasksController < ApplicationController
 
   def update
     command = UpdateTask.call(@task, task_params)
-    # project = Project.find(@task.project_id)
 
     if command.result
       render json: @task, status: :ok
@@ -69,15 +69,7 @@ class Api::V1::TasksController < ApplicationController
 
   private
 
-  def set_task
-    @task = Task.find(params[:id])
-  end
-
-  def set_project
-    @project = Project.find(params[:project_id])
-  end
-
   def task_params
-    params.permit(:name, :completed, :project_id, :move)
+    params.permit(:name, :completed, :deadline, :project_id, :move)
   end
 end

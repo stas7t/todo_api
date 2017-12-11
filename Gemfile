@@ -47,6 +47,8 @@ end
 gem 'acts_as_list', '~> 0.9.10'
 gem 'apipie-rails', '~> 0.5.5'
 
+gem 'cancancan', '~> 2.0'
+
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64', '~> 2.6'
 gem 'file_validators'

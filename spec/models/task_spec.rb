@@ -9,5 +9,4 @@ RSpec.describe Task, type: :model do
 
   it { expect(subject).to belong_to(:project) }
   it { expect(subject).to have_many(:comments) }
-  it { expect(subject).to have_one(:deadline) }
 end
