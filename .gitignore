@@ -18,3 +18,7 @@
 !/tmp/.keep
 
 .byebug_history
+
+/public/uploads/*
+
+.env

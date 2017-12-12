@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "id": { "type": "number" },
+    "name": { "type": "string" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" },
+    "project_id": { "type": "number" },
+    "position": { "type": "number" },
+    "url": { "type": "string" }
+  }
+}
