@@ -30,6 +30,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
 end
 
+group :development do
+  gem 'listen', '~> 3.1'
+end
+
 group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'json_matchers', '~> 0.7'
