@@ -28,7 +28,7 @@ module TodoApi
     # cors configuration
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://stas7t-todo-angular.herokuapp.com'
+        origins 'https://stas7t-todo-angular.herokuapp.com, https://stas7t-todo-react.herokuapp.com/'
         resource '*', 
         headers: :any, 
         methods: %i[get post delete put patch options head]
