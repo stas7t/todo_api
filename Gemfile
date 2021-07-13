@@ -41,7 +41,7 @@ gem 'apipie-rails', '~> 0.5.5'
 
 gem 'cancancan', '~> 2.0'
 
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'carrierwave-base64', '~> 2.6'
 gem 'file_validators'
 gem 'fog-aws'
