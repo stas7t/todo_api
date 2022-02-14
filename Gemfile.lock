@@ -123,7 +123,7 @@ GEM
       racc (~> 1.4)
     pg (0.21.0)
     public_suffix (4.0.6)
-    puma (5.5.1)
+    puma (5.6.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -215,7 +215,7 @@ DEPENDENCIES
   json_matchers (~> 0.7)
   jwt (~> 2.1.0)
   pg (~> 0.21)
-  puma (~> 5.5)
+  puma (~> 5.6)
   rack-cors
   rails (~> 5.1.6)
   rails_12factor
